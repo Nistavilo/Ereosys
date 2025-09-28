@@ -3,8 +3,8 @@ import './globals.css'
 import React from 'react';
 
 export const metadata = {
-  title: 'LuvianTech | Website',
-  description: 'LuvianTech websitesi',
+  title: 'Ereosys',
+  description: 'Ereosys — Next-generation SaaS product company',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

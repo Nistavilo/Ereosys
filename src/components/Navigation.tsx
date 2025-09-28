@@ -11,7 +11,6 @@ import {
   ChevronDown,
   Zap,
   BookOpen,
-  Terminal,
   Building2,
   Shield,
   Users,
@@ -162,11 +161,15 @@ export function Navigation() {
               </AnimatePresence>
             </div>
 
-            <a href="#features" className="text-sm text-gray-300 hover:text-purple-400 transition-colors flex items-center gap-1 font-mono">
+            <a href="#about" className="text-sm text-gray-300 hover:text-purple-400 transition-colors flex items-center gap-1 font-mono">
               <Star className="h-4 w-4" />
-              Features
+              About
             </a>
 
+            <a href="#contact" className="text-sm text-gray-300 hover:text-emerald-400 transition-colors flex items-center gap-1 font-mono">
+              <Mail className="h-4 w-4" />
+              Contact
+            </a>
 
           </div>
 
@@ -182,15 +185,9 @@ export function Navigation() {
               }}
               transition={{ duration: 3, repeat: Infinity }}
             >
-
             </motion.div>
 
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button variant="outline" size="sm" className="border-blue-500/50 text-blue-300 hover:bg-blue-500/10 font-mono">
-                <Terminal className="mr-2 h-3 w-3" />
-                Login
-              </Button>
-            </motion.div>
+            {/* Login kaldırıldı */}
 
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button size="sm" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg shadow-blue-500/25 font-mono">
@@ -234,10 +231,8 @@ export function Navigation() {
             >
               <div className="flex flex-col p-6 space-y-4">
                 <a href="#products" className="text-gray-300 hover:text-blue-400 text-sm font-mono">Our Products</a>
-                <a href="#features" className="text-gray-300 hover:text-purple-400 text-sm font-mono">Features</a>
-                <a href="#developers" className="text-gray-300 hover:text-emerald-400 text-sm font-mono">Developers</a>
-                <a href="#pricing" className="text-gray-300 hover:text-cyan-400 text-sm font-mono">Pricing</a>
-                <a href="#company" className="text-gray-300 hover:text-orange-400 text-sm font-mono">Company</a>
+                <a href="#about" className="text-gray-300 hover:text-purple-400 text-sm font-mono">About</a>
+                <a href="#contact" className="text-gray-300 hover:text-emerald-400 text-sm font-mono">Contact</a>
 
                 <hr className="border-blue-500/30"/>
 
@@ -246,10 +241,9 @@ export function Navigation() {
                     <div className="w-2 h-2 bg-emerald-400 rounded-full mr-2 animate-pulse" />
                     All Systems Operational
                   </Badge>
-                  <Button variant="outline" size="sm" className="border-blue-500/50 text-blue-300 hover:bg-blue-500/10 font-mono">
-                    <Terminal className="mr-2 h-4 w-4" />
-                    Login
-                  </Button>
+
+                  {/* Login kaldırıldı */}
+
                   <Button size="sm" className="bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg font-mono">
                     Try Free
                     <Zap className="ml-2 h-4 w-4" />

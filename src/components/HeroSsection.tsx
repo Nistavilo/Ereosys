@@ -4,29 +4,22 @@ import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { Card, CardContent } from "./ui/card";
 import {
-  Github,
   ArrowRight,
   Terminal,
-  Sparkles,
   Copy,
   Check,
-  TrendingUp,
   Shield,
   Building2,
-  Cpu,
   Database,
   Cloud,
-  Zap,
   Code,
-  Layers,
-  Globe,
   Users,
-  Rocket
+  Rocket,
+  Mail
 } from "lucide-react";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { useState, useEffect, useMemo } from "react";
 
-const INSTALL_COMMAND = "npm install @ereosys/sdk";
 const FLOATING_ICONS = [Terminal, Code, Database, Shield, Cloud, Building2];
 
 const STATS = [
@@ -66,39 +59,17 @@ export function MyApp() {
   )
 }`;
 
-function useTypewriter(fullText: string, speed = 80) {
-  const [text, setText] = useState("");
-
-  useEffect(() => {
-    let i = 0;
-    const timer = setInterval(() => {
-      if (i <= fullText.length) {
-        setText(fullText.slice(0, i));
-        i++;
-      } else {
-        clearInterval(timer);
-      }
-    }, speed);
-    return () => clearInterval(timer);
-  }, [fullText, speed]);
-
-  return text;
-}
-
 export default function HeroSection() {
   const { scrollY } = useScroll();
   const reduceMotion = useReducedMotion();
-  
+
   const orb1Y = useTransform(scrollY, [0, 500], [0, 100]);
   const orb2Y = useTransform(scrollY, [0, 500], [0, -75]);
   const orb3Y = useTransform(scrollY, [0, 400], [0, 50]);
-  
-  const typedCommand = useTypewriter(INSTALL_COMMAND);
-  
-  const [copiedCommand, setCopiedCommand] = useState(false);
+
   const [copiedCode, setCopiedCode] = useState(false);
 
-  // SaaS product themed floating data
+  // Floating data (removed CRM/SDK chars)
   const [dataPoints, setDataPoints] = useState<Array<{
     left: number;
     duration: number;
@@ -107,26 +78,21 @@ export default function HeroSection() {
   }>>([]);
 
   useEffect(() => {
-    const productChars = "EREO{}CRM[]</>SDK";
+    const chars = "EREOSYS<>{}()";
     const points = Array.from({ length: 20 }).map(() => ({
       left: Math.random() * 100,
       duration: Math.random() * 8 + 10,
       delay: Math.random() * 5,
-      char: productChars[Math.floor(Math.random() * productChars.length)]
+      char: chars[Math.floor(Math.random() * chars.length)]
     }));
     setDataPoints(points);
   }, []);
 
-  const handleCopy = async (text: string, type: "command" | "code") => {
+  const handleCopyCode = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
-      if (type === "command") {
-        setCopiedCommand(true);
-        setTimeout(() => setCopiedCommand(false), 2000);
-      } else {
-        setCopiedCode(true);
-        setTimeout(() => setCopiedCode(false), 2000);
-      }
+      setCopiedCode(true);
+      setTimeout(() => setCopiedCode(false), 2000);
     } catch (e) {
       console.error("Kopyalama hatası:", e);
     }
@@ -329,40 +295,17 @@ export default function HeroSection() {
                 </motion.span>
               </h1>
 
-              {/* Product-focused Description */}
+              {/* Description */}
               <div className="space-y-3">
                 <p className="text-xl text-gray-300 leading-relaxed max-w-lg font-mono">
                   <span className="text-blue-400 text-3xl">&gt;</span> Building next-generation{" "}
                   <span className="text-purple-400 font-bold bg-purple-400/10 px-2 py-1 rounded">SaaS products</span>{" "}
                   that power modern businesses worldwide.
                 </p>
-                
-                {/* Product Feature Pills */}
-                <div className="flex flex-wrap gap-2 mt-4">
-                  {["CRM Platform", "Analytics Suite", "Cloud Infrastructure"].map((feature, idx) => (
-                    <motion.div
-                      key={idx}
-                      className="px-3 py-1 bg-slate-800/50 border border-blue-500/30 rounded-full text-xs text-blue-300 font-mono backdrop-blur-sm"
-                      whileHover={{ scale: 1.05, borderColor: "rgba(59, 130, 246, 0.6)" }}
-                      animate={
-                        reduceMotion ? undefined : {
-                          borderColor: [
-                            "rgba(59, 130, 246, 0.3)",
-                            "rgba(139, 92, 246, 0.4)",
-                            "rgba(59, 130, 246, 0.3)"
-                          ]
-                        }
-                      }
-                      transition={{ duration: 3, repeat: Infinity, delay: idx * 0.5 }}
-                    >
-                      {feature}
-                    </motion.div>
-                  ))}
-                </div>
               </div>
             </motion.div>
 
-            {/* Enhanced CTAs */}
+            {/* CTAs */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -392,6 +335,7 @@ export default function HeroSection() {
                 </Button>
               </motion.div>
 
+              {/* Farklı aksiyon: Contact */}
               <motion.div 
                 whileHover={{ scale: 1.05, y: -3 }} 
                 whileTap={{ scale: 0.95 }}
@@ -402,50 +346,17 @@ export default function HeroSection() {
                   className="text-lg px-8 py-6 border-2 border-blue-500/60 text-blue-300 hover:bg-blue-500/20 hover:text-blue-200 font-mono backdrop-blur-sm"
                   asChild
                 >
-                  <a href="#products" rel="noopener noreferrer">
-                    <Globe className="mr-2 h-5 w-5" />
-                    EXPLORE PRODUCTS
+                  <a href="#contact" rel="noopener noreferrer">
+                    <Mail className="mr-2 h-5 w-5" />
+                    CONTACT US
                   </a>
                 </Button>
               </motion.div>
             </motion.div>
 
-            {/* SDK Installation Terminal */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="relative"
-            >
-              <motion.div
-                className="bg-slate-900/95 backdrop-blur-xl rounded-lg p-4 border border-blue-500/40 shadow-xl shadow-blue-500/20"
-                whileHover={{ scale: 1.01, borderColor: "rgba(59, 130, 246, 0.6)" }}
-              >
-                <div className="flex items-center justify-between">
-                  <div className="font-mono text-sm text-green-400 flex items-center gap-2">
-                    <span className="text-blue-400">$</span>
-                    <span>{typedCommand}</span>
-                    {!reduceMotion && (
-                      <motion.span
-                        animate={{ opacity: [0, 1, 0] }}
-                        transition={{ duration: 1.2, repeat: Infinity }}
-                        className="inline-block w-2 h-5 bg-green-400"
-                      />
-                    )}
-                  </div>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => handleCopy(INSTALL_COMMAND, "command")}
-                    className="text-blue-300 hover:text-blue-100 hover:bg-blue-500/20 p-2"
-                  >
-                    {copiedCommand ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                  </Button>
-                </div>
-              </motion.div>
-            </motion.div>
+            {/* SDK Installation Terminal removed */}
 
-            {/* Product-focused Stats */}
+            {/* Stats */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -495,14 +406,14 @@ export default function HeroSection() {
             </motion.div>
           </div>
 
-          {/* Product Integration Code Terminal */}
+          {/* Code Terminal (generic, no CRM) */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
             className="relative"
           >
-            {/* Professional Frame */}
+            {/* Frame */}
             <motion.div
               className="absolute -inset-3 bg-gradient-to-r from-blue-500/25 via-purple-500/25 to-blue-500/25 rounded-xl blur-xl"
               animate={
@@ -531,14 +442,14 @@ export default function HeroSection() {
                   </div>
                   <div className="text-sm text-blue-400 ml-2 font-mono flex items-center gap-1">
                     <Code className="h-3 w-3" />
-                    ereosys-integration.js
+                    example.tsx
                   </div>
                   <div className="ml-auto flex items-center gap-2">
-                    <span className="text-xs text-gray-500 font-mono bg-slate-700/50 px-2 py-1 rounded text-[10px]">SDK</span>
+                    <span className="text-xs text-gray-500 font-mono bg-slate-700/50 px-2 py-1 rounded text-[10px]">EXAMPLE</span>
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={() => handleCopy(CODE_EXAMPLE, "code")}
+                      onClick={() => handleCopyCode(CODE_EXAMPLE)}
                       className="text-blue-300 hover:text-blue-100 hover:bg-blue-500/20 p-2"
                     >
                       {copiedCode ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
@@ -565,14 +476,10 @@ export default function HeroSection() {
                                 {line.split('//')[0]}
                                 <span className="text-green-400">//{line.split('//')[1]}</span>
                               </>
-                            ) : line.includes('import') ? (
-                              <span className="text-blue-400">{line}</span>
                             ) : line.includes('export') ? (
                               <span className="text-purple-400">{line}</span>
-                            ) : line.includes('Ereo') ? (
-                              <span className="text-cyan-400">{line}</span>
-                            ) : line.includes('const') || line.includes('useState') ? (
-                              <span className="text-yellow-400">{line}</span>
+                            ) : line.includes('function') ? (
+                              <span className="text-blue-400">{line}</span>
                             ) : line || " "}
                           </span>
                         </motion.div>
@@ -583,7 +490,7 @@ export default function HeroSection() {
               </CardContent>
             </Card>
 
-            {/* Product Floating Elements */}
+            {/* Floating Elements */}
             <motion.div
               className="absolute -top-6 -right-6 bg-gradient-to-r from-blue-600 to-purple-600 text-white p-3 rounded-xl shadow-xl"
               animate={
