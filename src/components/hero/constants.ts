@@ -14,8 +14,8 @@ export const FLOATING_ICONS = [Terminal, Code, Database, Shield, Cloud, Building
 
 export const STATS: StatItem[] = [
   { value: "99.9%", label: "UPTIME", color: "text-cyan-400", icon: Shield },
-  { value: "15K+", label: "ACTIVE USERS", color: "text-purple-400", icon: Users },
-  { value: "5+", label: "SAAS PRODUCTS", color: "text-pink-400", icon: Rocket }
+  { value: "0+", label: "ACTIVE USERS", color: "text-purple-400", icon: Users },
+  { value: "0+", label: "SAAS PRODUCTS", color: "text-pink-400", icon: Rocket }
 ];
 
 export const FLOATING_CHARS_SET = "EREOSYS<>{}()";

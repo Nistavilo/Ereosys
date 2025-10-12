@@ -61,7 +61,7 @@ export function Navigation() {
         }`}
       >
         {/* Desktop Navbar */}
-        <div className="hidden md:flex h-16 items-center justify-between px-28">
+        <div className="hidden md:flex h-16 items-center justify-between px-60">
           {/* Sol kısım → Logo + Linkler */}
           <div className="flex items-center space-x-8">
             {/* Logo */}
